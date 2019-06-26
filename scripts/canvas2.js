@@ -8,18 +8,6 @@ class Map2Canvas{
       width: 10,
       height: 10,
     }
-    this.walls = [
-      {
-        start: {
-          x: 160,
-          y: 200,
-        },
-        end: {
-          x: 160,
-          y: 240,
-        }
-      }
-    ]
   }
 
   drawKey(player){
@@ -49,7 +37,6 @@ class Map2Canvas{
     this.ctx.drawImage(img,enemy.x,enemy.y,enemy.width,enemy.height);
   }
   drawMap(){
-    
     this.ctx.clearRect(0, 0, 750, 600);
     this.ctx.globalAlpha = 0.01;
     this.ctx.lineWidth = 10;
@@ -85,18 +72,11 @@ class Map2Canvas{
     this.ctx.clearRect(x,y,width,height);
   }
   drawUser(img,user){
-    // this.ctx.drawImage(img,x,y,width,height);
     this.ctx.globalAlpha = 1;
-    // let playerImage = new Image();
-    // playerImage.crossOrigin = "Anonymous";
-    // playerImage.src = img;
     this.ctx.drawImage(img,user.x,user.y,user.width,user.height);
-    // this.ctx.fillStyle = "#FFFFFF";
-    // this.ctx.fillRect(x,y,width,height);
   }
 
   detectLine(x, y) {
-    // console.log("Detect line function called")
     var imageData = this.ctx.getImageData(0, 0, 750, 600),
         inputData = imageData.data,
         pData = (~~x + (~~y * 750)) * 4;

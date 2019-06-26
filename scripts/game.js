@@ -2,14 +2,16 @@ window.onload = function() {
   $("#prepare-player").toggle();
   $("#game-screen").toggle();
   $("#game-over").toggle();
+  $("#winner").toggle();
   $("#map2").toggle();
+  $("#map3").toggle();
   class Game {
     constructor(id, enemyStrength) {
       if (id === 0) {
         this.theCanvas = new MapCanvas();
-      } else if ((id = 1)) {
+      } else if (id === 1) {
         this.theCanvas = new Map2Canvas();
-      } else if ((id = 2)) {
+      } else if (id === 2) {
         this.theCanvas = new Map3Canvas();
       }
       this.enemyStrength = enemyStrength;
@@ -105,8 +107,17 @@ window.onload = function() {
       $("#game-over").toggle();
       this.user = undefined;
     }
+    escaped(){
+      $("#game-screen").toggle();
+      $("#winner").toggle();
+      this.user = undefined;
+    }
 
     switchFromLevelOneToLevelTwo() {
+      $(`${this.myId}`).toggle();
+      $(`${this.nextId}`).toggle();
+    }
+    switchFromLevelTwoToLevelThree() {
       $(`${this.myId}`).toggle();
       $(`${this.nextId}`).toggle();
     }
@@ -295,11 +306,18 @@ window.onload = function() {
   });
   let switchToTwo = 0;
   let oneLifeBoost = 0;
+  let switchToThree = 0;
+  let thirdLevelLifeBoost = 0;
   $(document).keydown(function(e) {
     let directions = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
     if (myGame.levelWon === true && switchToTwo === 0) {
       myGame.switchFromLevelOneToLevelTwo();
       switchToTwo++;
+    }
+    if (myGame2.levelWon === true && switchToThree === 0) {
+      myGame2.switchFromLevelTwoToLevelThree();
+      switchToThree++;
+      myGame3.theCanvas.releaseTheGuards = true;
     }
     if (!myGame.levelWon) {
       if (directions.includes(e.key)) {
@@ -309,7 +327,7 @@ window.onload = function() {
         // myGame.theCanvas.drawKey(myGame.user);
 
         if (myGame.isWinner(130, 160, 160, 130)) {
-          alert("winner");
+          alert("NEXT LEVEL");
         }
       }
 
@@ -331,18 +349,24 @@ window.onload = function() {
       }
     } else if (!myGame2.levelWon) {
       if (oneLifeBoost == 0) {
-        let health = document.getElementById("health");
-        health.value += 20;
-        oneLifeBoost++;
-        myGame2.user.health = myGame.user.health + 20;
+        if (myGame.user.health + 20 > 100) {
+          let health = document.getElementById("health");
+          health.value = 100;
+          oneLifeBoost++;
+          myGame2.user.health = 100;
+        } else {
+          let health = document.getElementById("health");
+          health.value += 20;
+          oneLifeBoost++;
+          myGame2.user.health = myGame.user.health + 20;
+        }
       }
       if (directions.includes(e.key)) {
         e.preventDefault();
         myGame2.user.moveYourSelf(e.key, myGame2.theCanvas, myGame2);
         myGame2.user.gotKey(myGame2.theCanvas);
-        // myGame.theCanvas.drawKey(myGame.user);
         if (myGame2.isWinner(680, 720, 130, 90)) {
-          alert("winner");
+          alert("NEXT LEVEL");
         }
       }
 
@@ -360,6 +384,45 @@ window.onload = function() {
             myGame2.lastArrowPressed
           );
           myGame2.bullets.push(currBullet);
+        }
+      }
+    } else {
+      if (thirdLevelLifeBoost == 0) {
+        if (myGame2.user.health + 40 > 100) {
+          let health = document.getElementById("health");
+          health.value = 100;
+          thirdLevelLifeBoost++;
+          myGame3.user.health = 100;
+        } else {
+          let health = document.getElementById("health");
+          health.value += 40;
+          thirdLevelLifeBoost++;
+          myGame3.user.health = myGame2.user.health + 40;
+        }
+      }
+      if (directions.includes(e.key)) {
+        e.preventDefault();
+        myGame3.user.moveYourSelf(e.key, myGame3.theCanvas, myGame3);
+        myGame3.user.gotKey(myGame3.theCanvas);
+        if (myGame3.isWinner(320, 380, 40, 10)) {
+          myGame3.escaped();
+        }
+      }
+
+      if (e.code === "Space") {
+        e.preventDefault();
+        if (myGame3.bullets.length < 3) {
+          shotFired.play();
+          myGame3.playerShoot();
+          myGame3.bulletCordinateX = myGame3.user.x;
+          myGame3.bulletCordinateY = myGame3.user.y;
+          myGame3.bulletCordinates();
+          let currBullet = new Bullet(
+            myGame3.bulletCordinateX,
+            myGame3.bulletCordinateY,
+            myGame3.lastArrowPressed
+          );
+          myGame3.bullets.push(currBullet);
         }
       }
     }
@@ -435,10 +498,16 @@ window.onload = function() {
     new Enemy(250, 150, 20, 20, 0),
     new Enemy(50, 150, 20, 20, 0),
     new Enemy(280, 150, 20, 40, 0),
-    new Enemy(350, 150, 20, 40, 0),
+    new Enemy(350, 150, 20, 40, 4),
     new Enemy(450, 150, 20, 40, 5),
     new Enemy(400, 150, 20, 40, 5),
-    new Enemy(500, 150, 20, 40, 0)
+    new Enemy(500, 50, 20, 40, 4),
+    new Enemy(550, 50, 20, 40, 5),
+    new Enemy(580, 150, 20, 40, 5),
+    new Enemy(50, 50, 20, 40, 4),
+    new Enemy(100, 150, 20, 40, 0),
+    new Enemy(80, 20, 20, 40, 5),
+    new Enemy(480, 50, 20, 40, 5)
   ];
   myGame3.createEveryoneMovement();
   myGame3.theCanvas.drawKey(myGame3.user);

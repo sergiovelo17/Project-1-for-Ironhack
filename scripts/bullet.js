@@ -155,6 +155,5 @@ class Bullet {
         this.bulletCollision(allBullets);
       }
     }
-    console.log(allBullets);
   }
 }

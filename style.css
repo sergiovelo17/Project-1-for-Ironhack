@@ -132,3 +132,15 @@ body {
   color: red;
   align-self: center;
 }
+#winner{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+  align-content: space-around;
+  justify-content: center;
+  margin: 0 60px;
+}
+#winner *{
+  color: red;
+  align-self: center;
+}

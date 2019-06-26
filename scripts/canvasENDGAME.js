@@ -3,23 +3,12 @@ class Map3Canvas{
   constructor(){
     this.ctx = document.getElementById('map3').getContext("2d");
     this.key = {
-      x: 500,
-      y: 600,
+      x: 600,
+      y: 500,
       width: 10,
       height: 10,
     }
-    this.walls = [
-      {
-        start: {
-          x: 160,
-          y: 200,
-        },
-        end: {
-          x: 160,
-          y: 240,
-        }
-      }
-    ]
+    this.releaseTheGuards = false;
   }
 
   drawKey(player){
@@ -30,8 +19,8 @@ class Map3Canvas{
     this.ctx.closePath();
     } else{
       this.ctx.font = "20px Copperplate";
-      this.ctx.fillStyle = "#000000";
-      this.ctx.fillText("EXIT->",300,90);
+      this.ctx.fillStyle = "#ff0000";
+      this.ctx.fillText("EXIT->",260,20);
     }
   }
   drawBullet(theBullet){
@@ -45,39 +34,40 @@ class Map3Canvas{
     this.ctx.clearRect(enemy.x,enemy.y,enemy.width,enemy.height);
   }
   drawEnemy(img,enemy){
-    // this.ctx.fillStyle = "#ff0000";
     this.ctx.drawImage(img,enemy.x,enemy.y,enemy.width,enemy.height);
   }
   drawMap(){
-    
     this.ctx.clearRect(0, 0, 750, 600);
-    this.ctx.globalAlpha = 1;
+    this.ctx.globalAlpha = 0.01;
     this.ctx.lineWidth = 10;
     this.ctx.beginPath();
     this.ctx.strokeStyle = "#ff0000";
     this.ctx.fillStyle = "#ff0000";
-    this.ctx.moveTo(0,65);
-    this.ctx.lineTo(750,65);
-    this.ctx.moveTo(0,570);
-    this.ctx.lineTo(750,570);
-    this.ctx.moveTo(580,200);
-    this.ctx.lineTo(700,200);
-    this.ctx.rotate(23 * Math.PI / 180);
-    this.ctx.fillRect(580,40,70,250);
-    this.ctx.resetTransform();
-    this.ctx.rotate(320 * Math.PI / 180);
-    this.ctx.fillRect(310,520,140,250);
-    this.ctx.resetTransform();
-    this.ctx.rotate(26 * Math.PI / 180);
-    this.ctx.fillRect(460,-90,70,250);
-    this.ctx.resetTransform();
-    this.ctx.rotate(316 * Math.PI / 180);
-    this.ctx.fillRect(-180,290,140,270);
-    this.ctx.resetTransform();
-    this.ctx.moveTo(2,65);
-    this.ctx.lineTo(2,570);
-    this.ctx.moveTo(748,65);
-    this.ctx.lineTo(748,570);
+    if(this.releaseTheGuards === false){
+    this.ctx.moveTo(0,200)
+    this.ctx.lineTo(750,200);
+    }
+    this.ctx.moveTo(750,200);
+    this.ctx.lineTo(750,0);
+    this.ctx.lineTo(0,0);
+    this.ctx.lineTo(0,200);
+    this.ctx.lineTo(0,600);
+    this.ctx.lineTo(750,600);
+    this.ctx.lineTo(750,200);
+    this.ctx.stroke();
+    this.ctx.closePath();
+    this.ctx.beginPath();
+    this.ctx.moveTo(420,320);
+    this.ctx.arc(420, 320, 75, 1*Math.PI, 2.5*Math.PI);
+    this.ctx.fill();
+    this.ctx.moveTo(260,515);
+    this.ctx.lineTo(320,500);
+    this.ctx.lineTo(330,420);
+    this.ctx.moveTo(260,515);
+    this.ctx.lineTo(190,500);
+    this.ctx.lineTo(180,420);
+    this.ctx.lineTo(230,370);
+    this.ctx.lineTo(300,375);
     this.ctx.stroke();
     this.ctx.closePath();
   }
@@ -85,14 +75,8 @@ class Map3Canvas{
     this.ctx.clearRect(x,y,width,height);
   }
   drawUser(img,user){
-    // this.ctx.drawImage(img,x,y,width,height);
     this.ctx.globalAlpha = 1;
-    // let playerImage = new Image();
-    // playerImage.crossOrigin = "Anonymous";
-    // playerImage.src = img;
     this.ctx.drawImage(img,user.x,user.y,user.width,user.height);
-    // this.ctx.fillStyle = "#FFFFFF";
-    // this.ctx.fillRect(x,y,width,height);
   }
 
   detectLine(x, y) {
