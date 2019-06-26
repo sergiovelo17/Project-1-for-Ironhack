@@ -17,7 +17,7 @@
 <body>
   <div id="starting-page">
   <div class="title-heading">
-    <h1>THE GAME NAME</h1>
+    <h1>IronEscape</h1>
   </div>
   <div id="start">
     <button id="start-game">Click to begin</button>
@@ -26,14 +26,13 @@
   <div id="prepare-player">
     <div id="game-description">
       <h3>We need your help</h3>
-      <p>The government has taken over the building and are hiding their secret project at the top floor. We need you to get there.</p>
+      <p>You need to escape the prison before the guards catch you. If you get to close to them they will hear you.</p>
       <p>Use the <b>space bar</b> to shoot the enemies and the <b>up</b>, <b>down</b>, <b>left</b>, and <b>right</b> keys to move around</p>
-      <p>Remember, our servers are down and we cannot open the elevator from here, so you need to find the <b>golden key</b> to open the elevators</p>
+      <p>Remember, our servers are down and we cannot open the doors from here, so you need to find the <b>golden key</b> to open each door</p>
       <h3>Good Luck</h3>
     </div>
     <div id="loading-box">
-     <canvas id="thGame" height="600" width="400"></canvas>
-    </div>
+        <img src="./img/gif-player-loading.gif" alt="Guy on phone" width="450px" height="350px">    </div>
     <div id="customize-your-game">
       <h3>customize your game</h3>
       <label>Name: </label>
@@ -44,6 +43,7 @@
   <div id="game-screen">
   <canvas id="map" height="600" width="750"></canvas>
   <canvas id="map2" height="600" width="750"></canvas>
+  <canvas id="map3" height="600" width="750"></canvas>
   <div id="player-info">
     <img src = "./img/player-image-use.gif" alt="player face" id="doomFace" width="160" height="80">
     <h3 id="Players-name"></h3>
@@ -56,6 +56,7 @@
   </div>
   <script src="./scripts/canvas.js"></script>
   <script src="./scripts/canvas2.js"></script>
+  <script src="./scripts/canvasENDGAME.js"></script>
   <script src="./scripts/person.js"></script>
   <script src="./scripts/player.js"></script>
   <script src="./scripts/enemy.js"></script>

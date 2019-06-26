@@ -13,6 +13,7 @@ class Enemy extends Person {
     this.enemyBulletCordX = 1;
     this.enemyBulletCordY = 1;
     this.playerIsSeen = false;
+    this.shotSoundSrc = 'music/8d82b5_doom_shotgun_firing_sound_effect.mp3'
   }
   createEnemyDying(url) {
     let enemyImage = new Image();
@@ -52,7 +53,10 @@ class Enemy extends Person {
      
     // if(!this.wallInFront(user,theGame)){
     theGame.enemyBulletCoordinates(this);
-   if(Math.floor(Math.random() * 7) == 5){
+   if(Math.floor(Math.random() * 7) == 5 && theGame.levelWon == false){
+     let shotSound = new Audio();
+     shotSound.src  = this.shotSoundSrc;
+     shotSound.play();
     let currBullet = new Bullet(
       this.enemyBulletCordX,
       this.enemyBulletCordY,

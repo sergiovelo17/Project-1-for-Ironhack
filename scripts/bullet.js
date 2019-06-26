@@ -5,25 +5,26 @@ class Bullet {
     this.direction = direction;
     this.height = 4;
     this.width = 4;
+    this.deathSoundSrc = 'music/Roblox-death-sound.mp3';
   }
   bulletCollision(allBullets) {
     let index = allBullets.indexOf(this);
     allBullets.splice(index, 1);
   }
-  checkIfUserIsHit(user,theCanvas,myGame){
+  checkIfUserIsHit(user,myGame){
     if (
       this.x < user.x + user.width &&
       this.x + this.width > user.x &&
       this.y < user.y + user.height &&
       this.y + this.height > user.y
     ) {
-      if(!myGame.isWinner()){
+      if(myGame.levelWon === false){
       let health = document.getElementById("health")
-      health.value -= 10;
-      user.health -= 10;
+      health.value -= myGame.enemyStrength;
+      user.health -= myGame.enemyStrength;
     }
   }
-    if(user.health <= 0){
+    if(user.health <= 0 && myGame.levelWon === false){
       myGame.gameOver();
     }
   }
@@ -38,6 +39,9 @@ class Bullet {
         theEnemy.health -= 10;
       }
       if (theEnemy.health === 0) {
+        let deathSound = new Audio();
+        deathSound.src = this.deathSoundSrc;
+        deathSound.play();
         for (let i = 0; i < 5; i++) {
           if (i < 4) {
             setTimeout(function() {
@@ -72,7 +76,7 @@ class Bullet {
         theCanvas.drawBullet(this);
       } else {
         this.y -= 5;
-        this.checkIfUserIsHit(theUser,theCanvas,myGame);
+        this.checkIfUserIsHit(theUser,myGame);
         this.bulletCollision(enemyBullets);
       }
     }
@@ -82,7 +86,7 @@ class Bullet {
         theCanvas.drawBullet(this);
       } else {
         this.y += 6;
-        this.checkIfUserIsHit(theUser,theCanvas,myGame);
+        this.checkIfUserIsHit(theUser,myGame);
         this.bulletCollision(enemyBullets);
       }
     }
@@ -92,7 +96,7 @@ class Bullet {
         theCanvas.drawBullet(this);
       } else {
         this.x += 6;
-        this.checkIfUserIsHit(theUser,theCanvas, myGame);
+        this.checkIfUserIsHit(theUser, myGame);
         this.bulletCollision(enemyBullets);
       }
     }
@@ -102,7 +106,7 @@ class Bullet {
         theCanvas.drawBullet(this);
       } else {
         this.x -= 5;
-        this.checkIfUserIsHit(theUser,theCanvas, myGame);
+        this.checkIfUserIsHit(theUser, myGame);
         this.bulletCollision(enemyBullets);
       }
     }

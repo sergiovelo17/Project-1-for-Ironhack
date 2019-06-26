@@ -79,10 +79,6 @@ body {
   height: 60px;
   font-size: 40px;
 }
-#loading-box{
-  background-image: url(./img/temp.gif);
-  background-repeat: no-repeat;
-}
 #game-screen{
   display: flex;
   flex-direction: column;
@@ -98,6 +94,11 @@ body {
 }
 #map2{
   background-image: url(./img/mapfreightforIronhackGame.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#map3{
+  background-image: url(./img/ENDGAME-MAP.png);
   background-size: cover;
   background-repeat: no-repeat;
 }
