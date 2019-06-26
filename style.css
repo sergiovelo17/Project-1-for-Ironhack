@@ -1,0 +1,133 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: "copperplate";
+}
+body {
+  background-color: #494949;
+}
+
+
+.title-heading{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  color: white;
+  
+}
+.title-heading h1{
+  font-size: 60px;
+}
+
+#start{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 600px;
+}
+#start-game{
+  height:100px;
+  width: 400px;
+  font-size: 40px;
+  align-self: center;
+}
+#starting-page{
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+}
+
+#prepare-player{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  height: 600px;
+  margin: 0 40px;
+}
+#game-description{
+  width: 33%;
+  align-self: center;
+  text-align:  center;
+  background-color: black;
+  color: white;
+  height: 100%;
+  padding: 50px;
+}
+#game-description b{
+  color: #cc0000;
+}
+#customize-your-game{
+  display:flex;
+  flex-direction: column;
+  width: 33%;
+  align-self: center;
+  justify-content: space-around;
+  align-content: center;
+  text-align:  center;
+  background-color: black;
+  color: white;
+  height: 100%;
+  padding: 80px 50px;
+}
+#customize-your-game label{
+  font-size: 30px;
+}
+#user-is-ready{
+  width: 250px;
+  margin-left: 20px;
+  height: 60px;
+  font-size: 40px;
+}
+#loading-box{
+  background-image: url(./img/temp.gif);
+  background-repeat: no-repeat;
+}
+#game-screen{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 80%;
+  padding-left: 280px;
+}
+#map{
+  background-image: url(./img/map2forgame.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#map2{
+  background-image: url(./img/mapfreightforIronhackGame.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#player-info{
+  display: flex;
+  background-image: url(./img/grey-player-bar.jpg);
+  background-repeat: no-repeat;
+  height: 80px;
+  background-size: cover;
+  width: 100%;
+  justify-content: space-around;
+}
+#health{
+  align-self: center;
+  width: 200px;
+  height: 50px;
+  background-color: red;
+}
+#Players-name{
+  align-self: center;
+}
+#game-over{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+  align-content: space-around;
+  justify-content: center;
+  margin: 0 60px;
+}
+#game-over *{
+  color: red;
+  align-self: center;
+}

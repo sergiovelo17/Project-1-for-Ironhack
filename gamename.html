@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.js"
+    integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- <script src="./script.js"></script> -->
+  
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div id="starting-page">
+  <div class="title-heading">
+    <h1>THE GAME NAME</h1>
+  </div>
+  <div id="start">
+    <button id="start-game">Click to begin</button>
+  </div>
+</div>
+  <div id="prepare-player">
+    <div id="game-description">
+      <h3>We need your help</h3>
+      <p>The government has taken over the building and are hiding their secret project at the top floor. We need you to get there.</p>
+      <p>Use the <b>space bar</b> to shoot the enemies and the <b>up</b>, <b>down</b>, <b>left</b>, and <b>right</b> keys to move around</p>
+      <p>Remember, our servers are down and we cannot open the elevator from here, so you need to find the <b>golden key</b> to open the elevators</p>
+      <h3>Good Luck</h3>
+    </div>
+    <div id="loading-box">
+     <canvas id="thGame" height="600" width="400"></canvas>
+    </div>
+    <div id="customize-your-game">
+      <h3>customize your game</h3>
+      <label>Name: </label>
+      <input for="userName" id="userName">
+      <button id="user-is-ready">READY?</button>
+    </div>
+  </div>
+  <div id="game-screen">
+  <canvas id="map" height="600" width="750"></canvas>
+  <canvas id="map2" height="600" width="750"></canvas>
+  <div id="player-info">
+    <img src = "./img/player-image-use.gif" alt="player face" id="doomFace" width="160" height="80">
+    <h3 id="Players-name"></h3>
+    <progress id="health" value="100" max="100"></progress>
+  </div>
+  </div>
+  <div id="game-over">
+    <h1>YOU FAILED THE MISSION</h1>
+    <img src="./img/game-over.gif" alt="mission-failed">
+  </div>
+  <script src="./scripts/canvas.js"></script>
+  <script src="./scripts/canvas2.js"></script>
+  <script src="./scripts/person.js"></script>
+  <script src="./scripts/player.js"></script>
+  <script src="./scripts/enemy.js"></script>
+  <script src="./scripts/bullet.js"></script>
+  <script src="./scripts/game.js"></script>
+</body>
+
+</html>
