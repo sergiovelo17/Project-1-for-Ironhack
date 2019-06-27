@@ -160,7 +160,7 @@ window.onload = function() {
         this.bullets.forEach(theBullet => {
           theBullet.drawSelf(this.theCanvas, this.bullets, this.enemies);
         });
-      }, 20);
+      }, 10);
     }
     enemyShoot() {
       setInterval(() => {
@@ -172,7 +172,7 @@ window.onload = function() {
             this
           );
         });
-      }, 20);
+      }, 10);
     }
     createEveryoneMovement() {
       this.user.createPlayerMovingRight(
