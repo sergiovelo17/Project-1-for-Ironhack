@@ -38,7 +38,7 @@ class Map3Canvas{
   }
   drawMap(){
     this.ctx.clearRect(0, 0, 750, 600);
-    this.ctx.globalAlpha = 0.01;
+    this.ctx.globalAlpha = 1;
     this.ctx.lineWidth = 10;
     this.ctx.beginPath();
     this.ctx.strokeStyle = "#ff0000";

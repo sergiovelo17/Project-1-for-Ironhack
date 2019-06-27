@@ -52,7 +52,7 @@ class MapCanvas {
   }
   drawMap() {
     this.ctx.clearRect(0, 0, 750, 600);
-    this.ctx.globalAlpha = 0.01;
+    this.ctx.globalAlpha = 1;
     this.ctx.lineWidth = 8;
     this.ctx.beginPath();
     this.ctx.strokeStyle = "#ff0000";
@@ -136,11 +136,9 @@ class MapCanvas {
     var imageData = this.ctx.getImageData(0, 0, 750, 600),
       inputData = imageData.data,
       pData = (~~x + ~~y * 750) * 4;
-
     if (inputData[pData + 3]) {
       return true;
     }
-
     return false;
   }
 }

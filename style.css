@@ -81,11 +81,12 @@ body {
 }
 #game-screen{
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
-  width: 80%;
-  padding-left: 280px;
+  align-items: center;
+  margin:0 25%;
+  width: 750px;
 }
 #map{
   background-image: url(./img/map2forgame.jpg);
