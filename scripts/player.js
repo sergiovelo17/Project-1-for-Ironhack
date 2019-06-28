@@ -10,7 +10,7 @@ class Player extends Person {
     this.playerShooting = [];
     this.lastUserImage;
   }
-
+  //checks if player acquired the key, if so open the exit
   gotKey(theCanvas) {
     if (
       this.x < theCanvas.key.x + theCanvas.key.width &&
@@ -21,6 +21,7 @@ class Player extends Person {
       this.keyAcquired = true;
     }
   }
+  //functions to create player moving in all directions
   createPlayerMovingRight(url) {
     let playerImage = new Image();
     playerImage.crossOrigin = "Anonymous";
@@ -51,6 +52,7 @@ class Player extends Person {
     playerImage.src = url;
     this.playerShooting.push(playerImage);
   }
+  //allow player to move in all directions if no wall is present
   moveYourSelf(key, theCanvas, myGame) {
     theCanvas.clearUser(this.x, this.y, this.width, this.height);
     if (key === "ArrowDown") {

@@ -1,5 +1,5 @@
 class Map2Canvas{
-
+  //canvas for level two
   constructor(){
     this.ctx = document.getElementById('map2').getContext("2d");
     this.key = {
@@ -33,7 +33,6 @@ class Map2Canvas{
     this.ctx.clearRect(enemy.x,enemy.y,enemy.width,enemy.height);
   }
   drawEnemy(img,enemy){
-    // this.ctx.fillStyle = "#ff0000";
     this.ctx.drawImage(img,enemy.x,enemy.y,enemy.width,enemy.height);
   }
   drawMap(){

@@ -1,4 +1,5 @@
 class MapCanvas {
+  //canvas for map 1
   constructor() {
     this.ctx = document.getElementById("map").getContext("2d");
     this.key = {
@@ -47,9 +48,9 @@ class MapCanvas {
     this.ctx.clearRect(enemy.x, enemy.y, enemy.width, enemy.height);
   }
   drawEnemy(img, enemy) {
-    // this.ctx.fillStyle = "#ff0000";
     this.ctx.drawImage(img, enemy.x, enemy.y, enemy.width, enemy.height);
   }
+  //created lines for all walls of the background image to simulate real borders
   drawMap() {
     this.ctx.clearRect(0, 0, 750, 600);
     this.ctx.globalAlpha = 0.01;
@@ -132,6 +133,7 @@ class MapCanvas {
    
   }
 
+  //detect lines drawn on canvas using getImageData()
   detectLine(x, y) {
     var imageData = this.ctx.getImageData(0, 0, 750, 600),
       inputData = imageData.data,

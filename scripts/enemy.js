@@ -15,6 +15,7 @@ class Enemy extends Person {
     this.playerIsSeen = false;
     this.shotSoundSrc = 'music/8d82b5_doom_shotgun_firing_sound_effect.mp3'
   }
+  //creates enemy animation arrays
   createEnemyDying(url) {
     let enemyImage = new Image();
     enemyImage.crossOrigin = "Anonymous";
@@ -50,8 +51,7 @@ class Enemy extends Person {
   
 
   attackPlayer(user, theGame) {
-     
-    // if(!this.wallInFront(user,theGame)){
+     //allows enemy to 'fire' bullets at player randomly when in distance
     theGame.enemyBulletCoordinates(this);
    if(Math.floor(Math.random() * 7) == 5 && theGame.levelWon == false){
      let shotSound = new Audio();
@@ -64,14 +64,14 @@ class Enemy extends Person {
     );
     theGame.enemyBullets.push(currBullet);
     }
-  // }
+
   }
   playerInVicinity(user) {
     if (user.x - this.x < 100 && user.y - this.y < 100) {
       this.playerIsSeen = true;
     }
   }
-
+//moves the enemy in a direction, changes direction if wall is encountered
   drawSelf(theCanvas, user, theGame) {
     theCanvas.clearEnemy(this);
     this.playerInVicinity(user);
@@ -135,7 +135,7 @@ class Enemy extends Person {
         theCanvas.drawEnemy(img, this);
       }
 
-      // theCanvas.drawEnemy(this);
+      //changes behavior of enemy once player is in distance
     } else {
       if (user.x === this.x || user.x === this.x + 5 || user.x === this.x - 5) {
         if(user.y > this.y){

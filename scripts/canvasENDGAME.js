@@ -1,5 +1,5 @@
 class Map3Canvas{
-
+  //canvas for final map
   constructor(){
     this.ctx = document.getElementById('map3').getContext("2d");
     this.key = {

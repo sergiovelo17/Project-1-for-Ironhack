@@ -7,10 +7,12 @@ class Bullet {
     this.width = 4;
     this.deathSoundSrc = 'music/Roblox-death-sound.mp3';
   }
+  //deletes bullet from array once it collides
   bulletCollision(allBullets) {
     let index = allBullets.indexOf(this);
     allBullets.splice(index, 1);
   }
+  //checks if user is hit by bullet, also checking if game is over
   checkIfUserIsHit(user,myGame){
     if (
       this.x < user.x + user.width &&
@@ -28,6 +30,7 @@ class Bullet {
       myGame.gameOver();
     }
   }
+  //check if enemy is hit, adding animation and sound if he dies
   checkHit(enemyArr,theCanvas) {
     enemyArr.forEach(theEnemy => {
       if (
@@ -67,8 +70,8 @@ class Bullet {
       }
     });
   }
+  //moves bullets in direction they are sent until they collide 
   drawEnemyBullet(theCanvas, enemyBullets, theUser, myGame){
-    
     theCanvas.clearBullet(this);
     if (this.direction === "N") {
       if (!theCanvas.detectLine(this.x, this.y - 5)) {

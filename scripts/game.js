@@ -7,6 +7,7 @@ window.onload = function() {
   $("#map3").toggle();
   class Game {
     constructor(id, enemyStrength) {
+      //selects which map to use based on the id passed as a parameter
       if (id === 0) {
         this.theCanvas = new MapCanvas();
       } else if (id === 1) {
@@ -27,16 +28,10 @@ window.onload = function() {
       this.levelWon = false;
     }
 
-    drawGame1() {
+    drawGame() {
       this.theCanvas.drawMap();
     }
-    drawGame2() {
-      this.theCanvas.drawMap();
-    }
-    drawGame3() {
-      this.theCanvas.drawMap();
-    }
-
+    //change player image from walking to stationary, shooting a gun
     playerShoot() {
       if (this.lastArrowPressed === "N") {
         this.theCanvas.clearUser(
@@ -72,7 +67,7 @@ window.onload = function() {
         this.theCanvas.drawUser(this.user.playerShooting[3], this.user);
       }
     }
-
+    //centers bullet projection from the center of the players body
     bulletCordinates() {
       if (this.lastArrowPressed === "N") {
         this.bulletCordinateX += 14;
@@ -101,12 +96,13 @@ window.onload = function() {
         theEnemy.enemyBulletCordY = theEnemy.y + 19;
       }
     }
-
+    //toggle the game over screen once the player has lost
     gameOver() {
       $("#game-screen").toggle();
       $("#game-over").toggle();
       this.user = undefined;
     }
+    //toggle the winning screen once the player has escaped the three levels
     escaped(){
       $("#game-screen").toggle();
       $("#winner").toggle();
@@ -121,7 +117,7 @@ window.onload = function() {
       $(`${this.myId}`).toggle();
       $(`${this.nextId}`).toggle();
     }
-
+    //check if user has acquired and they are in x and y coordinates to win level
     isWinner(leftx, rightx, topy, bottomy) {
       if (
         this.user.keyAcquired === true &&
@@ -141,9 +137,11 @@ window.onload = function() {
         theEnemy.drawSelf(this.theCanvas, this);
       });
     }
+    //animate map
     animate() {
       let num = 0;
       setInterval(() => {
+        //redraw map every 1.5 seconds to fix any breaks in walls
         if (num % 15 === 0) {
           this.theCanvas.drawMap();
           this.theCanvas.drawUser(this.user.lastUserImage, this.user);
@@ -155,12 +153,13 @@ window.onload = function() {
         num++;
       }, 100);
     }
+    //loop through all bullets and draw them in updated coordinate
     shoot() {
       setInterval(() => {
         this.bullets.forEach(theBullet => {
           theBullet.drawSelf(this.theCanvas, this.bullets, this.enemies);
         });
-      }, 5);
+      }, 10);
     }
     enemyShoot() {
       setInterval(() => {
@@ -172,8 +171,9 @@ window.onload = function() {
             this
           );
         });
-      }, 5);
+      }, 10);
     }
+    //create enemy and player movement using sprites (had to use dropbox as source due to CORS policy with getImageData() on canvas)
     createEveryoneMovement() {
       this.user.createPlayerMovingRight(
         "https://dl.dropboxusercontent.com/s/1sg6rtrx73bi2mr/THISright%5B0%5D.png?dl=0"
@@ -299,7 +299,7 @@ window.onload = function() {
       });
     }
   }
-
+//grabs the inputted name from user and places it on the game screen
   $("#user-is-ready").click(() => {
     let usersName = $("#userName")[0].value;
     $("#Players-name")[0].innerHTML = usersName;
@@ -310,6 +310,7 @@ window.onload = function() {
   let thirdLevelLifeBoost = 0;
   $(document).keydown(function(e) {
     let directions = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
+    //checks to see if map should be switched
     if (myGame.levelWon === true && switchToTwo === 0) {
       myGame.switchFromLevelOneToLevelTwo();
       switchToTwo++;
@@ -319,6 +320,7 @@ window.onload = function() {
       switchToThree++;
       myGame3.theCanvas.releaseTheGuards = true;
     }
+    //use key functions on current level only
     if (!myGame.levelWon) {
       if (directions.includes(e.key)) {
         e.preventDefault();
@@ -427,6 +429,7 @@ window.onload = function() {
       }
     }
   });
+  //add audio for different elements and toggle through the pages
   let shotFired = new Audio();
   shotFired.src = "music/8d82b5_doom_shotgun_firing_sound_effect.mp3";
   let music = new Audio();
@@ -449,10 +452,11 @@ window.onload = function() {
       $("#game-screen").toggle();
     }, 1000);
   });
+  //create all three instances of the game class with respective properties
   let myGame = new Game(0, 10);
   myGame.myId = "#map";
   myGame.nextId = "#map2";
-  myGame.drawGame1();
+  myGame.drawGame();
   myGame.enemies = [
     new Enemy(150, 150, 20, 20, 4),
     new Enemy(280, 150, 20, 20, 4),
@@ -472,7 +476,7 @@ window.onload = function() {
   let myGame2 = new Game(1, 20);
   myGame2.myId = "#map2";
   myGame2.nextId = "#map3";
-  myGame2.drawGame2();
+  myGame2.drawGame();
   myGame2.enemies = [
     new Enemy(150, 150, 20, 20, 5),
     new Enemy(250, 150, 20, 20, 0),
@@ -492,7 +496,7 @@ window.onload = function() {
   myGame2.enemyShoot();
   let myGame3 = new Game(2, 20);
   myGame3.myId = "#map3";
-  myGame3.drawGame3();
+  myGame3.drawGame();
   myGame3.enemies = [
     new Enemy(150, 150, 20, 20, 5),
     new Enemy(250, 150, 20, 20, 0),
